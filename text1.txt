@@ -1,0 +1,3 @@
+this is a rdd and spark session with the spark context
+this is a learning workspace
+this is a method
