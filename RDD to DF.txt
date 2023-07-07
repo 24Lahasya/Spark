@@ -1,0 +1,29 @@
+import org.apache.spark.sql.{Row, SparkSession}
+
+object RddToDF {
+  case class Person(name: String, age: Int)
+
+  def main(args: Array[String]): Unit = {
+    val spark = SparkSession.builder()
+      .appName("RDD to DataFrame Example")
+      .master("local[*]")
+      .getOrCreate()
+
+    // Create an RDD of Person objects
+    val rdd = spark.sparkContext.parallelize(Seq(
+      Person("Klaus", 45),
+      Person("Hayle", 40),
+      Person("Hope", 15)
+    ))
+
+
+    import spark.implicits._
+    val df = rdd.toDF()
+
+
+    df.show()
+
+
+    spark.stop()
+   }
+}
